@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+:root {
+  --google-blue: #4285F4;
+  --google-red: #EA4335;
+  --google-yellow: #FBBC05;
+  --google-green: #34A853;
+  --google-surface: #F8F9FA;
+  --google-card: #FFFFFF;
+  --google-border: #E1E3E1;
+  --google-text: #1F1F1F;
+  --google-subtext: #5F6368;
+}
+
+body {
+  background-color: var(--google-surface);
+  color: var(--google-text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Custom Google Color Accent Bar */
+.google-accent-bar {
+  height: 4px;
+  background: linear-gradient(
+    90deg, 
+    var(--google-blue) 0% 25%, 
+    var(--google-red) 25% 50%, 
+    var(--google-yellow) 50% 75%, 
+    var(--google-green) 75% 100%
+  );
+}
+
+/* Smooth Pulse Animation for Live Routing Indicator */
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.02); }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 2s infinite ease-in-out;
+}
