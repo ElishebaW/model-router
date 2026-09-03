@@ -30,13 +30,13 @@ class HuggingFaceService:
         if simulate_failure:
             raise HuggingFaceServiceError("Simulated Hugging Face API failure triggered for testing failover.")
 
-        if not self.api_key or self.api_key == "YOUR_HUGGINGFACE_API_KEY":
+        if not self.api_key or "YOUR_HUGGINGFACE_API_KEY" in self.api_key or self.api_key == "YOUR_HUGGINGFACE_API_KEY_HERE":
             # Synthetic output for local demo mode if key not configured yet
             time.sleep(0.2)
             return (
                 f"[Hugging Face Demo Mode - {self.model}]\n"
                 f"Processed prompt: \"{prompt[:60]}...\"\n"
-                f"HuggingFace API key not set in environment. Set HUGGINGFACE_API_KEY in backend/.env for real Qwen2.5 outputs."
+                f"HuggingFace API key not configured yet. Add HUGGINGFACE_API_KEY in backend/.env for real Qwen2.5 outputs."
             )
 
         headers = {

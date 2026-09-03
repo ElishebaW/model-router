@@ -33,13 +33,13 @@ class GoogleService:
         if simulate_failure:
             raise GoogleServiceError("Simulated Google API failure triggered for testing failover.")
 
-        if not self.api_key or self.api_key == "YOUR_GOOGLE_API_KEY":
+        if not self.api_key or "YOUR_GOOGLE_API_KEY" in self.api_key or self.api_key == "YOUR_GOOGLE_API_KEY_HERE":
             # Provide an informative synthetic response if key is missing during local demo mode
             time.sleep(0.3)
             return (
                 f"[Google API Demo Mode - {self.model}]\n"
                 f"Processed prompt: \"{prompt[:60]}...\"\n"
-                f"Google API key not set in environment. Set GOOGLE_API_KEY in backend/.env to get real Gemini outputs."
+                f"Google API key not configured yet. Add GOOGLE_API_KEY in backend/.env to get real Gemini 2.5 Flash outputs."
             )
 
         try:
