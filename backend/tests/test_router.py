@@ -1,4 +1,5 @@
 import pytest
+from app.config import settings
 from app.router import inspect_route, ModelRouter
 from app.schemas import RouteRequest
 
@@ -8,7 +9,7 @@ def test_inspect_route_short_words():
     inspection = inspect_route("Hello world this test")
     assert inspection.primary_route == "huggingface"
     assert inspection.word_count == 4
-    assert inspection.model_name == "Qwen/Qwen2.5-7B-Instruct"
+    assert inspection.model_name == settings.HUGGINGFACE_MODEL
     assert "Word count" in inspection.reason
 
 
@@ -18,7 +19,7 @@ def test_inspect_route_short_chars():
     assert inspection.primary_route == "huggingface"
     assert inspection.word_count == 1
     assert inspection.char_count == 3
-    assert inspection.model_name == "Qwen/Qwen2.5-7B-Instruct"
+    assert inspection.model_name == settings.HUGGINGFACE_MODEL
 
 
 def test_inspect_route_long_prompt():

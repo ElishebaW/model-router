@@ -23,8 +23,9 @@ class HuggingFaceService:
     def __init__(self, api_key: str = None, model: str = None):
         self.api_key = api_key or settings.HUGGINGFACE_API_KEY
         self.model = model or settings.HUGGINGFACE_MODEL
-        # Hugging Face Router endpoint
-        self.api_url = f"https://api-inference.huggingface.co/models/{self.model}"
+        # Hugging Face modern Serverless Router endpoints
+        self.chat_url = "https://router.huggingface.co/hf-inference/v1/chat/completions"
+        self.direct_url = f"https://router.huggingface.co/models/{self.model}"
 
     def _call_api_internal(self, prompt: str, simulate_failure: bool = False) -> str:
         if simulate_failure:
@@ -44,23 +45,29 @@ class HuggingFaceService:
             "Content-Type": "application/json"
         }
 
-        # Try Hugging Face Chat Completions format or standard text generation format
-        payload = {
-            "inputs": prompt,
-            "parameters": {
-                "max_new_tokens": 512,
-                "temperature": 0.7,
-                "return_full_text": False
-            }
+        # Primary: Chat Completions API format on router.huggingface.co
+        chat_payload = {
+            "model": self.model,
+            "messages": [{"role": "user", "content": prompt}],
+            "max_tokens": 512,
+            "temperature": 0.7
         }
 
         try:
             with httpx.Client(timeout=settings.REQUEST_TIMEOUT_SECONDS) as client:
-                response = client.post(self.api_url, headers=headers, json=payload)
+                response = client.post(self.chat_url, headers=headers, json=chat_payload)
                 
+                # If 404 or unsupported format, attempt direct router model endpoint
+                if response.status_code == 404:
+                    direct_payload = {
+                        "inputs": prompt,
+                        "parameters": {"max_new_tokens": 512, "temperature": 0.7, "return_full_text": False}
+                    }
+                    response = client.post(self.direct_url, headers=headers, json=direct_payload)
+
                 # Check for model loading 503 status
                 if response.status_code == 503:
-                    error_data = response.json()
+                    error_data = response.json() if response.content else {}
                     estimated_time = error_data.get("estimated_time", 10.0)
                     logger.info(f"HF model is loading. Estimated time: {estimated_time}s")
                     raise HuggingFaceServiceError(f"HuggingFace model loading (503). Retrying...")
@@ -71,6 +78,16 @@ class HuggingFaceService:
                     )
 
                 data = response.json()
+                
+                # Parse OpenAI / Chat Completion format
+                if isinstance(data, dict) and "choices" in data and len(data["choices"]) > 0:
+                    choice = data["choices"][0]
+                    if "message" in choice and "content" in choice["message"]:
+                        content = choice["message"]["content"]
+                        if content:
+                            return content.strip()
+
+                # Parse standard HuggingFace list response format
                 if isinstance(data, list) and len(data) > 0:
                     first_elem = data[0]
                     if "generated_text" in first_elem:
@@ -80,8 +97,6 @@ class HuggingFaceService:
                 elif isinstance(data, dict):
                     if "generated_text" in data:
                         return data["generated_text"].strip()
-                    elif "choices" in data and len(data["choices"]) > 0:
-                        return data["choices"][0].get("message", {}).get("content", "").strip()
 
                 return str(data)
         except Exception as e:
