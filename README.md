@@ -6,20 +6,20 @@ Featuring a **Python FastAPI** backend with exponential backoff & jitter retries
 
 ---
 
-## 🌟 Key Features
+## Key Features
 
-- 🎯 **Static Routing Rules**:
+- **Static Routing Rules**:
   - **Hugging Face (`meta-llama/Llama-3.3-70B-Instruct`)**: Prompts with **< 10 words OR < 10 characters**.
   - **Google API (`google/gemini-2.5-flash`)**: Prompts with **&ge; 10 words AND &ge; 10 characters**.
-- 🛡️ **Resilience with Backoff & Jitter**: All model calls are wrapped with randomized exponential backoff retries using `tenacity`.
-- ⚡ **Automatic Dynamic Failover**: If the primary target (e.g. Google API) encounters rate limits, timeouts, or errors, the router automatically fails over to the secondary provider (Hugging Face).
-- 🚨 **Graceful Degradation**: Clear user feedback and fallback notices if services experience outage.
-- 🎨 **Google-Themed Light UI**: Next.js 16 + TypeScript dashboard with live routing target badge, real-time counters, failover simulation controls, and execution metrics.
-- ☁️ **Google Cloud Ready**: Containerized with Dockerfiles and automated Cloud Run deployment scripts.
+- **Resilience with Backoff & Jitter**: All model calls are wrapped with randomized exponential backoff retries using `tenacity`.
+- **Automatic Dynamic Failover**: If the primary target (e.g. Google API) encounters rate limits, timeouts, or errors, the router automatically fails over to the secondary provider (Hugging Face).
+- **Graceful Degradation**: Clear user feedback and fallback notices if services experience outage.
+- **Google-Themed Light UI**: Next.js 16 + TypeScript dashboard with live routing target badge, real-time counters, failover simulation controls, and execution metrics.
+- **Google Cloud Ready**: Containerized with Dockerfiles and automated Cloud Run deployment scripts.
 
 ---
 
-## 🏗️ Architecture Overview
+## Architecture Overview
 
 ```
                       ┌──────────────────────────────────────┐
@@ -46,7 +46,7 @@ Featuring a **Python FastAPI** backend with exponential backoff & jitter retries
 
 ---
 
-## ⚙️ Environment Configuration
+## Environment Configuration
 
 Copy `.env.example` to create your local `.env` file:
 
@@ -76,7 +76,7 @@ MAX_RETRIES=3
 
 ---
 
-## 🚀 Quick Start (Local Development)
+## Quick Start (Local Development)
 
 ### 1. Start Python Backend
 
@@ -112,7 +112,7 @@ Frontend UI will be running at: `http://localhost:3000`
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ### Backend Unit & Integration Tests (Pytest)
 
@@ -138,7 +138,7 @@ npm run build
 
 ---
 
-## ☁️ Deployment to Google Cloud Run
+## Deployment to Google Cloud Run
 
 To deploy both frontend and backend to Google Cloud Run:
 
@@ -164,7 +164,7 @@ gcloud run deploy model-router-frontend --source ./frontend --region us-central1
 
 ---
 
-## 📂 Project Repository Structure
+## Project Repository Structure
 
 ```
 model-router/
@@ -200,6 +200,6 @@ model-router/
 
 ---
 
-## 📄 License
+## License
 
 MIT License. Designed for Staff AI Engineering & Production GenAI Workloads.
