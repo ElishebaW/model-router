@@ -40,7 +40,7 @@ Featuring a **Python FastAPI** backend with exponential backoff & jitter retries
                                  │                 │
              ┌───────────────────┴─┐             ┌─┴───────────────────┐
              │   Google Gemini API │             │   HuggingFace API   │
-             │ google/gemini-2.5-flash           │ Qwen/Qwen2.5-7B-Instruct
+             │ google/gemini-2.5-flash           │ meta-llama/Llama-3.3-70B-Instruct
              └─────────────────────┘             └─────────────────────┘
 ```
 
@@ -61,12 +61,12 @@ Edit `backend/.env` to include your credentials:
 # Google API Key (for Gemini 2.5 Flash)
 GOOGLE_API_KEY=your_google_api_key_here
 
-# HuggingFace API Key (for Qwen2.5-7B-Instruct)
+# HuggingFace API Key (for Llama-3.3-70B-Instruct)
 HUGGINGFACE_API_KEY=your_huggingface_api_key_here
 
 # Optional Overrides
 GOOGLE_MODEL=google/gemini-2.5-flash
-HUGGINGFACE_MODEL=Qwen/Qwen2.5-7B-Instruct
+HUGGINGFACE_MODEL=meta-llama/Llama-3.3-70B-Instruct
 WORD_COUNT_THRESHOLD=10
 CHAR_COUNT_THRESHOLD=10
 MAX_RETRIES=3
@@ -176,7 +176,7 @@ model-router/
 │   │   ├── schemas.py          # Pydantic validation models
 │   │   └── services/
 │   │       ├── google_service.py # Gemini 2.5 Flash client with backoff
-│   │       └── hf_service.py     # Qwen2.5-7B client with backoff
+│   │       └── hf_service.py     # Llama-3.3-70B client with backoff
 │   ├── tests/
 │   │   └── test_router.py      # Pytest test suite
 │   ├── Dockerfile
