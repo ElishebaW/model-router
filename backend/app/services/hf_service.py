@@ -38,7 +38,6 @@ class HuggingFaceService:
 
         try:
             client = InferenceClient(
-                provider="hf-inference",
                 api_key=self.api_key
             )
             messages = [{"role": "user", "content": prompt}]
