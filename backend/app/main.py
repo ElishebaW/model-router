@@ -21,7 +21,7 @@ logger = logging.getLogger("model_router")
 
 app = FastAPI(
     title="GenAI Model Router API",
-    description="Static and dynamic resilient router for Google Gemini 2.5 Flash and HuggingFace Qwen2.5-7B.",
+    description="Static and dynamic resilient router for Google Gemini 2.5 Flash and HuggingFace Llama-3.3-70B-Instruct.",
     version="1.0.0",
 )
 

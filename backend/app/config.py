@@ -9,7 +9,7 @@ class Settings(BaseSettings):
 
     # Models (Per user instructions)
     GOOGLE_MODEL: str = "google/gemini-2.5-flash"
-    HUGGINGFACE_MODEL: str = "Qwen/Qwen2.5-7B-Instruct"
+    HUGGINGFACE_MODEL: str = "meta-llama/Llama-3.3-70B-Instruct"
 
     # Routing Thresholds (Static Routing)
     WORD_COUNT_THRESHOLD: int = 10

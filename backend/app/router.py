@@ -14,7 +14,7 @@ def inspect_route(prompt: str) -> RouteInspection:
     """
     Evaluates prompt static metrics and determines primary destination.
     Rule:
-    - Less than 10 words OR less than 10 characters -> Hugging Face (Qwen/Qwen2.5-7B-Instruct)
+    - Less than 10 words OR less than 10 characters -> Hugging Face (meta-llama/Llama-3.3-70B-Instruct)
     - 10+ words AND 10+ characters -> Google API (google/gemini-2.5-flash)
     """
     cleaned_prompt = prompt.strip()

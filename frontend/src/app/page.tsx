@@ -332,7 +332,7 @@ export default function Home() {
 
               <div className="space-y-2 text-xs text-[#5F6368]">
                 <div className="p-2.5 rounded-lg bg-green-50 border border-green-100 text-green-900">
-                  <strong className="text-[#34A853]">Hugging Face Route:</strong> Triggered when word count &lt; 10 OR character count &lt; 10. Uses <code className="font-mono bg-white px-1 py-0.5 rounded text-[#34A853]">Qwen/Qwen2.5-7B-Instruct</code>.
+                  <strong className="text-[#34A853]">Hugging Face Route:</strong> Triggered when word count &lt; 10 OR character count &lt; 10. Uses <code className="font-mono bg-white px-1 py-0.5 rounded text-[#34A853]">meta-llama/Llama-3.3-70B-Instruct</code>.
                 </div>
                 <div className="p-2.5 rounded-lg bg-blue-50 border border-blue-100 text-blue-900">
                   <strong className="text-[#4285F4]">Google API Route:</strong> Triggered when word count &ge; 10 AND character count &ge; 10. Uses <code className="font-mono bg-white px-1 py-0.5 rounded text-[#4285F4]">google/gemini-2.5-flash</code>.

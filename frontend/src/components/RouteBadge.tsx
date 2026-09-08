@@ -48,7 +48,7 @@ export const RouteBadge: React.FC<RouteBadgeProps> = ({ prompt, forceRoute }) =>
           </div>
           <p className="text-sm font-medium text-[#1F1F1F]">
             {target === 'huggingface'
-              ? 'Qwen/Qwen2.5-7B-Instruct'
+              ? 'meta-llama/Llama-3.3-70B-Instruct'
               : 'google/gemini-2.5-flash'}
           </p>
         </div>

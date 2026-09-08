@@ -1,6 +1,6 @@
 # GenAI LLM Model Router
 
-An enterprise-grade, resilient **Model Router Application** that intelligently routes text prompts between **Google API** (`google/gemini-2.5-flash`) and **HuggingFace API** (`Qwen/Qwen2.5-7B-Instruct`) based on static text rules and dynamic API health failovers.
+An enterprise-grade, resilient **Model Router Application** that intelligently routes text prompts between **Google API** (`google/gemini-2.5-flash`) and **HuggingFace API** (`meta-llama/Llama-3.3-70B-Instruct`) based on static text rules and dynamic API health failovers.
 
 Featuring a **Python FastAPI** backend with exponential backoff & jitter retries, and a modern **Next.js (TypeScript)** frontend styled with Google's iconic four-color light theme. Designed for seamless deployment to **Google Cloud Run**.
 
@@ -9,7 +9,7 @@ Featuring a **Python FastAPI** backend with exponential backoff & jitter retries
 ## 🌟 Key Features
 
 - 🎯 **Static Routing Rules**:
-  - **Hugging Face (`Qwen/Qwen2.5-7B-Instruct`)**: Prompts with **< 10 words OR < 10 characters**.
+  - **Hugging Face (`meta-llama/Llama-3.3-70B-Instruct`)**: Prompts with **< 10 words OR < 10 characters**.
   - **Google API (`google/gemini-2.5-flash`)**: Prompts with **&ge; 10 words AND &ge; 10 characters**.
 - 🛡️ **Resilience with Backoff & Jitter**: All model calls are wrapped with randomized exponential backoff retries using `tenacity`.
 - ⚡ **Automatic Dynamic Failover**: If the primary target (e.g. Google API) encounters rate limits, timeouts, or errors, the router automatically fails over to the secondary provider (Hugging Face).

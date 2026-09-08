@@ -17,7 +17,7 @@ gcloud run deploy model-router-backend \
   --source ./backend \
   --region $REGION \
   --allow-unauthenticated \
-  --set-env-vars GOOGLE_MODEL="google/gemini-2.5-flash",HUGGINGFACE_MODEL="Qwen/Qwen2.5-7B-Instruct"
+  --set-env-vars GOOGLE_MODEL="google/gemini-2.5-flash",HUGGINGFACE_MODEL="meta-llama/Llama-3.3-70B-Instruct"
 
 BACKEND_URL=$(gcloud run services describe model-router-backend --region $REGION --format='value(status.url)')
 echo "Backend deployed successfully at: $BACKEND_URL"
